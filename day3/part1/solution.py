@@ -16,6 +16,7 @@ def check_neighbors(mtx, location):
     if i-1 >= 0 and j-1 >= 0 and check_char(mtx[i-1][j-1]): return True
     return False
 
+
 def is_good_number(mtx, locations):
     for loc in locations:
         if check_neighbors(mtx, loc):
@@ -25,8 +26,6 @@ def is_good_number(mtx, locations):
 
 def find_good_numbers_and_add(mtx):
     final_sum = 0
-    good_num_count = 0
-    bad_num_count = 0
     for row_idx, row in enumerate(mtx):
         current_number_location = []
         current_number = 0
@@ -42,25 +41,17 @@ def find_good_numbers_and_add(mtx):
                 is_good = is_good_number(mtx, current_number_location)
                 if is_good:
                     final_sum += current_number
-                    good_num_count += 1
-                else:
-                    bad_num_count += 1
                 num_start = False
                 current_number = 0
                 current_number_location = []
-    #print(f"Good num count: {good_num_count}, bad_num_count: {bad_num_count}")
-    #print(f"All numbers: {good_num_count+bad_num_count}")
     return final_sum
 
 
 if __name__ == '__main__':
     mtx = []
-    with open('day3/part1/input.txt', 'r') as f:
-        #row_idx = 0
+    with open('input.txt', 'r') as f:
         for line in f:
-            #mtx.append([])
             line = line.strip()
             mtx.append(line)
-            #row_idx += 1
     final_sum = find_good_numbers_and_add(mtx)
     print(f"The solution: {final_sum}")
